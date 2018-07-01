@@ -1,0 +1,29 @@
+First The inputs are chosen.
+X -- Inputs -- Size is N*D
+	N -- Number of samples
+	D -- Number of features
+Z -- Hidden layers -- Size is M
+W -- Weights connecting X and Z -- Size is D*M
+B1 -- Bias for connecting Z and Z -- Size is M
+C -- Number of classes -- Size is K
+Y -- Output -- Size is N*K
+V -- Weights connecting Z and Y -- Size is M * K
+B2 -- Bias connecting Z and Y -- Size is K
+
+Dimensions:
+	For Tanh : (Input to hidden) 
+		a = X.dot(W) + B1
+			Matrix Breakdown:
+				X.dot(W) = (N * D) dot (D * M) = N * M
+				X.dot(W) + B1 = (N * M) + (M) = N * M Dimension
+		Z = 1 / 1 + exp(-a)
+	For Softmax of Output: (Hidden to output)		
+		A = Z.dot(V) + B2
+			Matrix Breakdown:
+				Z.dot(V) = (N * M) dot (M * K) = N * K
+				z.dot(V) + B2 = (N * K) + (K) = N * K Dimension 
+		Y = softmax(A) 
+		Y = exp(A) / exp.sum(A)
+		Y -- Gives Predicted Probability
+
+

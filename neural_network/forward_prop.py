@@ -39,8 +39,15 @@ W2 = np.random.rand(M,K);
 b2 = np.random.rand(K);
 
 def forward_prop(X,W1,b1,W2,b2):
-    Z = 1 / (1 + np.exp(-X.dot(W1) - b1));
+    #sum of matrix dot and bias
+    a = X.dot(W1) + b1;
+    #tanh
+    Z = 1 / (1 + np.exp(-a));
+    
+    #sum of matrix dot and bias
     A = Z.dot(W2) + b2;
+    
+    #softmax
     exp_A = np.exp(A);
     Y_Pred = exp_A/exp_A.sum(axis=1,keepdims=True);
     return Y_Pred;
