@@ -33,5 +33,32 @@ plt.show();
 
 
 
-W1 = np.random.rand(D,M)
-b1 = np.rand
+W1 = np.random.rand(D,M);
+b1 = np.random.rand(M);
+W2 = np.random.rand(M,K);
+b2 = np.random.rand(K);
+
+def forward_prop(X,W1,b1,W2,b2):
+    Z = 1 / (1 + np.exp(-X.dot(W1) - b1));
+    A = Z.dot(W2) + b2;
+    exp_A = np.exp(A);
+    Y_Pred = exp_A/exp_A.sum(axis=1,keepdims=True);
+    return Y_Pred;
+
+def classification_rate(Y,P):
+    no_of_tests = len(Y);
+    no_of_correct = 0;
+    
+    for i in range(len(Y)):
+        if(Y[i] == P[i]):
+            no_of_correct += 1;
+            
+    return float(no_of_correct/no_of_tests);
+    
+Y_Pred = forward_prop(X,W1,b1,W2,b2);   
+print(Y_Pred) 
+P_Pred = np.argmax(Y_Pred,axis=1);
+
+print(P_Pred)
+
+print('Classification Rate : '  ,  classification_rate(Y,P_Pred));    
